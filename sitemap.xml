@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2020/10/23/Prettier-Set-up-in-VSCode-and-WebStorm/</loc>
+    <loc>http://crispgit.github.io/2020/10/23/Prettier-Set-up-in-VSCode-and-WebStorm/</loc>
     
     <lastmod>2020-10-24</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/2020/10/22/Recording-of-Setting-Up-This-Blog/</loc>
+    <loc>http://crispgit.github.io/2020/10/22/Recording-of-Setting-Up-This-Blog/</loc>
     
     <lastmod>2020-10-22</lastmod>
     
@@ -17,7 +17,7 @@
   
 
   <url>
-    <loc>http://example.com/</loc>
+    <loc>http://crispgit.github.io/</loc>
     <lastmod>2020-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -25,14 +25,14 @@
 
   
   <url>
-    <loc>http://example.com/tags/Tools/</loc>
+    <loc>http://crispgit.github.io/tags/Tools/</loc>
     <lastmod>2020-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/hexo/</loc>
+    <loc>http://crispgit.github.io/tags/hexo/</loc>
     <lastmod>2020-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
