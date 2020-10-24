@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://crispgit.github.io/2020/10/23/Prettier-Set-up-in-VSCode-and-WebStorm/</loc>
+    <loc>http://crispgit.github.io/2020/10/22/Recording-of-Setting-Up-This-Blog/</loc>
     
     <lastmod>2020-10-24</lastmod>
     
   </url>
   
   <url>
-    <loc>http://crispgit.github.io/2020/10/22/Recording-of-Setting-Up-This-Blog/</loc>
+    <loc>http://crispgit.github.io/2020/10/23/Prettier-Set-up-in-VSCode-and-WebStorm/</loc>
     
-    <lastmod>2020-10-22</lastmod>
+    <lastmod>2020-10-24</lastmod>
     
   </url>
   
@@ -25,7 +25,7 @@
 
   
   <url>
-    <loc>http://crispgit.github.io/tags/Tools/</loc>
+    <loc>http://crispgit.github.io/tags/IDE/</loc>
     <lastmod>2020-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -39,5 +39,12 @@
   </url>
   
 
+  
+  <url>
+    <loc>http://crispgit.github.io/categories/Tool/</loc>
+    <lastmod>2020-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
