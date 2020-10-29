@@ -4,19 +4,12 @@
   <url>
     <loc>http://crispgit.github.io/2020/10/23/Modern-React-with-Redux-Notes/</loc>
     
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-27</lastmod>
     
   </url>
   
   <url>
     <loc>http://crispgit.github.io/2020/10/23/Prettier-Set-up-in-VSCode-and-WebStorm/</loc>
-    
-    <lastmod>2020-10-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://crispgit.github.io/2020/10/25/Maaaxter-English-Channel-Notes/</loc>
     
     <lastmod>2020-10-25</lastmod>
     
@@ -32,7 +25,7 @@
 
   <url>
     <loc>http://crispgit.github.io/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -40,14 +33,14 @@
   
   <url>
     <loc>http://crispgit.github.io/tags/IDE/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://crispgit.github.io/tags/hexo/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -56,21 +49,21 @@
   
   <url>
     <loc>http://crispgit.github.io/categories/Tool/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://crispgit.github.io/categories/Web/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://crispgit.github.io/categories/Web/React/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
