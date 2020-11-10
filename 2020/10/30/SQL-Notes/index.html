@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="en"><head><meta name="google-site-verification" content="qQFjU3HEF3ObUKbSF6X9-p4LkrsVB1J_V7BY8PsGUYM"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>SQL Notes | Crisp's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">SQL Notes</h1><a id="logo" href="/.">Crisp's Blog</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">SQL Notes</h1><div class="post-meta">2020-10-30</div><div class="post-content"><p>This is my note from some tutorials while learning sql.</p>
+<p>Copyright belongs to the original source.</p>
+<h1 id="First-tutorial-about-query"><a href="#First-tutorial-about-query" class="headerlink" title="First tutorial about query"></a>First tutorial about query</h1><p>The tutorial comes from <a target="_blank" rel="noopener" href="http://www.xuesql.cn/">http://www.xuesql.cn/</a></p>
+<h2 id="Outer-Join"><a href="#Outer-Join" class="headerlink" title="Outer Join"></a>Outer Join</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--用LEFT/RIGHT/FULL JOINs 做多表查询</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">column</span>, another_column, …</span><br><span class="line"><span class="keyword">FROM</span> mytable</span><br><span class="line"><span class="keyword">INNER</span>/<span class="keyword">LEFT</span>/<span class="keyword">RIGHT</span>/<span class="keyword">FULL</span> <span class="keyword">JOIN</span> another_table</span><br><span class="line">    <span class="keyword">ON</span> mytable.id = another_table.matching_id</span><br><span class="line"><span class="keyword">WHERE</span> condition(s)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">column</span>, … <span class="keyword">ASC</span>/<span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">LIMIT</span> num_limit <span class="keyword">OFFSET</span> num_offset;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>an example</p>
+<p>we can select columns from other table(building) </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> buildings.building_name, buildings.capacity</span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> buildings</span><br><span class="line">	<span class="keyword">on</span> buildings.building_name = employees.building</span><br><span class="line"><span class="keyword">where</span> building_name</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Expression"><a href="#Expression" class="headerlink" title="Expression"></a>Expression</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>  particle_speed / <span class="number">2.0</span> <span class="keyword">AS</span> half_particle_speed (对结果做了一个除<span class="number">2</span>）</span><br><span class="line"><span class="keyword">FROM</span> physics_data</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">ABS</span>(particle_position) * <span class="number">10.0</span> &gt;<span class="number">500</span></span><br><span class="line">            （条件要求这个属性绝对值乘以<span class="number">10</span>大于<span class="number">500</span>）;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Exercise:</p>
+<p>![Screen Shot 2020-10-30 at 21.19.29](../../../../../Library/Application Support/typora-user-images/Screen Shot 2020-10-30 at 21.19.29.png)</p>
+<p> <img src="https://i.imgur.com/V4LBf3o.png" alt="Screen Shot 2020-10-30 at 21.19.38"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*1.</span></span><br><span class="line"><span class="comment">select id, title, (Boxoffice.Domestic_sales+boxoffice.International_sales)/1000000 AS sales</span></span><br><span class="line"><span class="comment">from movies</span></span><br><span class="line"><span class="comment">left join boxoffice</span></span><br><span class="line"><span class="comment">	on movies.id = boxoffice.movie_id</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*2.</span></span><br><span class="line"><span class="comment">select id, title, rating*10 AS Market_index</span></span><br><span class="line"><span class="comment">from movies</span></span><br><span class="line"><span class="comment">left join boxoffice</span></span><br><span class="line"><span class="comment">	on movies.id = boxoffice.movie_id</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*3.</span></span><br><span class="line"><span class="comment">select id, title, year </span></span><br><span class="line"><span class="comment">from movies</span></span><br><span class="line"><span class="comment">where year%2 = 0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> title, (domestic_sales + international_sales)/length_minutes <span class="keyword">as</span> <span class="keyword">value</span></span><br><span class="line"><span class="keyword">from</span> movies</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> boxoffice</span><br><span class="line">	<span class="keyword">on</span> movies.id=boxoffice.movie_id</span><br><span class="line"><span class="keyword">where</span> director=<span class="string">&quot;John Lasseter&quot;</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">value</span> <span class="keyword">desc</span></span><br><span class="line"><span class="keyword">limit</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>we can use <code>year%2</code> to express mod</p>
+<h2 id="Statistics-I"><a href="#Statistics-I" class="headerlink" title="Statistics I"></a>Statistics I</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> AGG_FUNC(column_or_expression) <span class="keyword">AS</span> aggregate_description, …</span><br><span class="line"><span class="keyword">FROM</span> mytable</span><br><span class="line"><span class="keyword">WHERE</span> constraint_expression;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>COUNT(*<strong>**)</strong>, *<em>COUNT(</em></strong>column*<strong>)</strong></td>
+<td>计数！COUNT(*) 统计数据行数，COUNT(column) 统计column非NULL的行数.</td>
+</tr>
+<tr>
+<td><strong>MIN(**<em>column</em></strong>)**</td>
+<td>找column最小的一行.</td>
+</tr>
+<tr>
+<td><strong>MAX(**<em>column</em></strong>)**</td>
+<td>找column最大的一行.</td>
+</tr>
+<tr>
+<td>*<em>AVG(**</em>column*)</td>
+<td>对column所有行取平均值.</td>
+</tr>
+<tr>
+<td><strong>SUM(**<em>column</em></strong>)**</td>
+<td>对column所有行求和.</td>
+</tr>
+</tbody></table>
+<h4 id="Group-by"><a href="#Group-by" class="headerlink" title="Group by"></a>Group by</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> AGG_FUNC(column_or_expression) <span class="keyword">AS</span> aggregate_description, …</span><br><span class="line"><span class="keyword">FROM</span> mytable</span><br><span class="line"><span class="keyword">WHERE</span> constraint_expression</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">column</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Exercise</p>
+<p><img src="https://i.imgur.com/0WkaWnQ.png" alt="Screen Shot 2020-10-30 at 21.49.54"></p>
+<p><img src="https://i.imgur.com/hBiuAc4.png" alt="Screen Shot 2020-10-30 at 21.50.06"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--select name, max(years_employed) from employees;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select role,avg(years_employed) from employees</span></span><br><span class="line"><span class="comment">group by role;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select building,sum(years_employed) from employees</span></span><br><span class="line"><span class="comment">group by building</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> building, <span class="keyword">count</span>(<span class="keyword">name</span>) <span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">where</span> building</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> building</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Statistics-II"><a href="#Statistics-II" class="headerlink" title="Statistics II"></a>Statistics II</h2><p><code>HAVING</code> select after group</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> group_by_column, AGG_FUNC(column_expression) <span class="keyword">AS</span> aggregate_result_alias, …</span><br><span class="line"><span class="keyword">FROM</span> mytable</span><br><span class="line"><span class="keyword">WHERE</span> condition</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">column</span></span><br><span class="line"><span class="keyword">HAVING</span> group_condition;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Exercise </p>
+<p>![Screen Shot 2020-10-30 at 22.03.08](../../../../../Library/Application Support/typora-user-images/Screen Shot 2020-10-30 at 22.03.08.png)</p>
+<p><img src="https://i.imgur.com/d6GlU5T.png" alt="Screen Shot 2020-10-30 at 22.03.15"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--select count(name) from employees where role=&quot;Artist&quot;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select role, count(*) from employees</span></span><br><span class="line"><span class="comment">group by role;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select sum(years_employed) from employees</span></span><br><span class="line"><span class="comment">where role=&quot;Engineer&quot;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">role</span>, <span class="keyword">count</span>(*) <span class="keyword">as</span> <span class="keyword">count</span>, building <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">as</span> bn</span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">role</span>, bn</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>we can <code>group by</code> two group</p>
+<p>use <code>is null</code> as a boolean divider</p>
+<h2 id="Query-Order"><a href="#Query-Order" class="headerlink" title="Query Order"></a>Query Order</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="keyword">column</span>, AGG_FUNC(column_or_expression), …</span><br><span class="line"><span class="keyword">FROM</span> mytable</span><br><span class="line">    <span class="keyword">JOIN</span> another_table</span><br><span class="line">      <span class="keyword">ON</span> mytable.column = another_table.column</span><br><span class="line">    <span class="keyword">WHERE</span> constraint_expression</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">column</span></span><br><span class="line">    <span class="keyword">HAVING</span> constraint_expression</span><br><span class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">column</span> <span class="keyword">ASC</span>/<span class="keyword">DESC</span></span><br><span class="line">    <span class="keyword">LIMIT</span> <span class="keyword">count</span> <span class="keyword">OFFSET</span> <span class="keyword">COUNT</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h2 id="1-FROM-和-JOINs"><a href="#1-FROM-和-JOINs" class="headerlink" title="1. FROM 和 JOINs"></a>1. <code>FROM</code> 和 <code>JOIN</code>s</h2><p><code>FROM</code> 或 <code>JOIN</code>会第一个执行，确定一个整体的数据范围. 如果要JOIN不同表，可能会生成一个临时Table来用于 下面的过程。总之第一步可以简单理解为确定一个数据源表（含临时表)</p>
+<h2 id="2-WHERE"><a href="#2-WHERE" class="headerlink" title="2. WHERE"></a>2. <code>WHERE</code></h2><p>我们确定了数据来源 <code>WHERE</code> 语句就将在这个数据源中按要求进行数据筛选，并丢弃不符合要求的数据行，所有的筛选col属性 只能来自<code>FROM</code>圈定的表. AS别名还不能在这个阶段使用，因为可能别名是一个还没执行的表达式</p>
+<h2 id="3-GROUP-BY"><a href="#3-GROUP-BY" class="headerlink" title="3. GROUP BY"></a>3. <code>GROUP BY</code></h2><p>如果你用了 <code>GROUP BY</code> 分组，那<code>GROUP BY</code> 将对之前的数据进行分组，统计等，并将是结果集缩小为分组数.这意味着 其他的数据在分组后丢弃.</p>
+<h2 id="4-HAVING"><a href="#4-HAVING" class="headerlink" title="4. HAVING"></a>4. <code>HAVING</code></h2><p>如果你用了 <code>GROUP BY</code> 分组, <code>HAVING</code> 会在分组完成后对结果集再次筛选。AS别名也不能在这个阶段使用.</p>
+<h2 id="5-SELECT"><a href="#5-SELECT" class="headerlink" title="5. SELECT"></a>5. <code>SELECT</code></h2><p>确定结果之后，<code>SELECT</code>用来对结果col简单筛选或计算，决定输出什么数据.</p>
+<h2 id="6-DISTINCT"><a href="#6-DISTINCT" class="headerlink" title="6. DISTINCT"></a>6. <code>DISTINCT</code></h2><p>如果数据行有重复<code>DISTINCT</code> 将负责排重.</p>
+<h2 id="7-ORDER-BY"><a href="#7-ORDER-BY" class="headerlink" title="7. ORDER BY"></a>7. <code>ORDER BY</code></h2><p>在结果集确定的情况下，<code>ORDER BY</code> 对结果做排序。因为<code>SELECT</code>中的表达式已经执行完了。此时可以用AS别名.</p>
+<h2 id="8-LIMIT-OFFSET"><a href="#8-LIMIT-OFFSET" class="headerlink" title="8. LIMIT / OFFSET"></a>8. <code>LIMIT</code> / <code>OFFSET</code></h2><p>最后 <code>LIMIT</code> 和 <code>OFFSET</code> 从排序的结果中截取部分数据.</p>
+</blockquote>
+<p>Exercise </p>
+<p><img src="https://i.imgur.com/a1knEFT.png" alt="Screen Shot 2020-10-30 at 23.07.36"></p>
+<p><img src="https://i.imgur.com/rPWZWiN.png" alt="Screen Shot 2020-10-30 at 23.07.50"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select director, count(*) from movies</span></span><br><span class="line"><span class="comment">group by director</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select director, sum(domestic_sales + international_sales) </span></span><br><span class="line"><span class="comment">from movies</span></span><br><span class="line"><span class="comment">	left join boxoffice</span></span><br><span class="line"><span class="comment">    	on movies.id=boxoffice.movie_id</span></span><br><span class="line"><span class="comment">    group by director</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select director, sum(domestic_sales + international_sales) as total_sales, count(*) as cnt, sum(domestic_sales + international_sales)/count(*)</span></span><br><span class="line"><span class="comment">from movies</span></span><br><span class="line"><span class="comment">	join boxoffice</span></span><br><span class="line"><span class="comment">    	on movies.id=boxoffice.movie_id</span></span><br><span class="line"><span class="comment">	group by director</span></span><br><span class="line"><span class="comment">    having count(*) &gt; 1</span></span><br><span class="line"><span class="comment">    order by total_sales/cnt desc</span></span><br><span class="line"><span class="comment">    limit 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> title, (<span class="keyword">select</span> <span class="keyword">max</span>(domestic_sales+international_sales)</span><br><span class="line">				<span class="keyword">from</span> movies</span><br><span class="line">				 	<span class="keyword">left</span> <span class="keyword">join</span> boxoffice</span><br><span class="line">			    	<span class="keyword">on</span> movies.id=boxoffice.movie_id)</span><br><span class="line">              -(domestic_sales + international_sales) <span class="keyword">as</span> diff</span><br><span class="line"><span class="keyword">from</span> movies</span><br><span class="line">	<span class="keyword">join</span> boxoffice</span><br><span class="line">    	<span class="keyword">on</span> movies.id=boxoffice.movie_id</span><br></pre></td></tr></table></figure>
+
+<p>Query something and use it as a variable</p>
+<h3 id="A-summary"><a href="#A-summary" class="headerlink" title="A summary"></a>A summary</h3><p><a target="_blank" rel="noopener" href="http://www.xuesql.cn/static/%E9%87%91%E8%80%81%E5%B8%88%E6%89%8B%E5%86%8C.html">http://www.xuesql.cn/static/%E9%87%91%E8%80%81%E5%B8%88%E6%89%8B%E5%86%8C.html</a></p>
+<p>There is a better resource…</p>
+<p><a target="_blank" rel="noopener" href="https://sqlbolt.com/lesson/inserting_rows">https://sqlbolt.com/lesson/inserting_rows</a></p>
+<h2 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h2><blockquote>
+<p>What is a Schema?</p>
+<p>We previously described a table in a database as a two-dimensional set of rows and columns, with the columns being the properties and the rows being instances of the entity in the table. In SQL, the <em>database schema</em> is what describes the structure of each table, and the datatypes that each column of the table can contain.</p>
+</blockquote>
+<p>Insert statement with values for all columns</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mytable </span><br><span class="line"><span class="keyword">VALUES</span> (value_or_expr, another_value_or_expr, …),       			 	(value_or_expr_2, another_value_or_expr_2, …),       …;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Insert statement with specific columns</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mytable </span><br><span class="line">(<span class="keyword">column</span>, another_column, …)</span><br><span class="line"><span class="keyword">VALUES</span> (value_or_expr, another_value_or_expr, …),      </span><br><span class="line">				(value_or_expr_2, another_value_or_expr_2, …),</span><br><span class="line">        …;</span><br></pre></td></tr></table></figure>
+
+<p>In these cases, the number of values need to match the number of columns specified. </p>
+<p>In addition, you can use mathematical and string expressions with the values that you are inserting.</p>
+<p>Example Insert statement with expressions</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> boxoffice </span><br><span class="line">(movie_id, rating, sales_in_millions)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">9.9</span>, <span class="number">283742034</span> / <span class="number">1000000</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mytable</span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">column</span> = value_or_expr, </span><br><span class="line">    other_column = another_value_or_expr, </span><br><span class="line">    …</span><br><span class="line"><span class="keyword">WHERE</span> condition;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> mytable</span><br><span class="line"><span class="keyword">WHERE</span> condition;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Create-tables"><a href="#Create-tables" class="headerlink" title="Create tables"></a>Create tables</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> mytable (</span><br><span class="line">    <span class="keyword">column</span> DataType TableConstraint <span class="keyword">DEFAULT</span> default_value,</span><br><span class="line">    another_column DataType TableConstraint <span class="keyword">DEFAULT</span> default_value,</span><br><span class="line">    …</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INTEGER</code>, <code>BOOLEAN</code></td>
+<td>The integer datatypes can store whole integer values like the count of a number or an age. In some implementations, the boolean value is just represented as an integer value of just 0 or 1.</td>
+</tr>
+<tr>
+<td><code>FLOAT</code>, <code>DOUBLE</code>, <code>REAL</code></td>
+<td>The floating point datatypes can store more precise numerical data like measurements or fractional values. Different types can be used depending on the floating point precision required for that value.</td>
+</tr>
+<tr>
+<td><code>CHARACTER(num_chars)</code>, <code>VARCHAR(num_chars)</code>, <code>TEXT</code></td>
+<td>The text based datatypes can store strings and text in all sorts of locales. The distinction between the various types generally amount to underlaying efficiency of the database when working with these columns.Both the CHARACTER and VARCHAR (variable character) types are specified with the max number of characters that they can store (longer values may be truncated), so can be more efficient to store and query with big tables.</td>
+</tr>
+<tr>
+<td><code>DATE</code>, <code>DATETIME</code></td>
+<td>SQL can also store date and time stamps to keep track of time series and event data. They can be tricky to work with especially when manipulating data across timezones.</td>
+</tr>
+<tr>
+<td><code>BLOB</code></td>
+<td>Finally, SQL can store binary data in blobs right in the database. These values are often opaque to the database, so you usually have to store them with the right metadata to requery them.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PRIMARY KEY</code></td>
+<td>This means that the values in this column are unique, and each value can be used to identify a single row in this table.</td>
+</tr>
+<tr>
+<td><code>AUTOINCREMENT</code></td>
+<td>For integer values, this means that the value is automatically filled in and incremented with each row insertion. Not supported in all databases.</td>
+</tr>
+<tr>
+<td><code>UNIQUE</code></td>
+<td>This means that the values in this column have to be unique, so you can’t insert another row with the same value in this column as another row in the table. Differs from the <code>PRIMARY KEY</code> in that it doesn’t have to be a key for a row in the table.</td>
+</tr>
+<tr>
+<td><code>NOT NULL</code></td>
+<td>This means that the inserted value can not be <code>NULL</code>.</td>
+</tr>
+<tr>
+<td><code>CHECK (expression)</code></td>
+<td>This allows you to run a more complex expression to test whether the values inserted are valid. For example, you can check that values are positive, or greater than a specific size, or start with a certain prefix, etc.</td>
+</tr>
+<tr>
+<td><code>FOREIGN KEY</code></td>
+<td>This is a consistency check which ensures that each value in this column corresponds to another value in a column in another table.  For example, if there are two tables, one listing all Employees by ID, and another listing their payroll information, the <code>FOREIGN KEY</code> can ensure that every row in the payroll table corresponds to a valid employee in the master Employee list.</td>
+</tr>
+</tbody></table>
+<h2 id="Altering-tables"><a href="#Altering-tables" class="headerlink" title="Altering tables"></a>Altering tables</h2><p>Altering table to add new column(s)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> mytable </span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">column</span> DataType OptionalTableConstraint</span><br><span class="line"><span class="keyword">DEFAULT</span> default_value;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Altering table to remove column(s)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> mytable </span><br><span class="line"><span class="keyword">DROP</span> column_to_be_deleted;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Altering table name</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> mytable </span><br><span class="line"><span class="keyword">RENAME</span> <span class="keyword">TO</span> new_table_name;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Dropping-tables"><a href="#Dropping-tables" class="headerlink" title="Dropping tables"></a>Dropping tables</h2><p>Drop table statement</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> mytable;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Second-tutorial"><a href="#Second-tutorial" class="headerlink" title="Second tutorial"></a>Second tutorial</h1><p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/sql">https://www.w3school.com.cn/sql</a></p>
+<h2 id="Order-by"><a href="#Order-by" class="headerlink" title="Order by"></a>Order by</h2><p><img src="https://i.imgur.com/2vHRiLQ.png" alt="Screen Shot 2020-10-31 at 11.45.52"></p>
+<h2 id="Insert-into"><a href="#Insert-into" class="headerlink" title="Insert into"></a>Insert into</h2><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名称 <span class="keyword">VALUES</span> (值<span class="number">1</span>, 值<span class="number">2</span>,....)</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以指定所要插入数据的列：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name (列<span class="number">1</span>, 列<span class="number">2</span>,...) VALUES (值<span class="number">1</span>, 值<span class="number">2</span>,....)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Update-1"><a href="#Update-1" class="headerlink" title="Update"></a>Update</h2><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名称 <span class="keyword">SET</span> 列名称 = 新值 <span class="keyword">WHERE</span> 列名称 = 某值</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新某一行中的若干列"><a href="#更新某一行中的若干列" class="headerlink" title="更新某一行中的若干列"></a>更新某一行中的若干列</h4><p>我们会修改地址（address），并添加城市名称（city）：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE Person <span class="builtin-name">SET</span><span class="built_in"> Address </span>= <span class="string">&#x27;Zhongshan 23&#x27;</span>, City = <span class="string">&#x27;Nanjing&#x27;</span></span><br><span class="line">WHERE LastName = <span class="string">&#x27;Wilson&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<table>
+<thead>
+<tr>
+<th align="left">LastName</th>
+<th align="left">FirstName</th>
+<th align="left">Address</th>
+<th align="left">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Gates</td>
+<td align="left">Bill</td>
+<td align="left">Xuanwumen 10</td>
+<td align="left">Beijing</td>
+</tr>
+<tr>
+<td align="left">Wilson</td>
+<td align="left">Fred</td>
+<td align="left">Zhongshan 23</td>
+<td align="left">Nanjing</td>
+</tr>
+</tbody></table>
+<h2 id="Delete-1"><a href="#Delete-1" class="headerlink" title="Delete"></a>Delete</h2><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名称 <span class="keyword">WHERE</span> 列名称 = 值</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有行"><a href="#删除所有行" class="headerlink" title="删除所有行"></a>删除所有行</h4><p>可以在不删除表的情况下删除所有的行。这意味着表的结构、属性和索引都是完整的：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="built_in">table_name</span></span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> * <span class="keyword">FROM</span> <span class="built_in">table_name</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Wildcard"><a href="#Wildcard" class="headerlink" title="Wildcard"></a>Wildcard</h2><table>
+<thead>
+<tr>
+<th align="left">通配符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">%</td>
+<td align="left">替代一个或多个字符</td>
+</tr>
+<tr>
+<td align="left">_</td>
+<td align="left">仅替代一个字符</td>
+</tr>
+<tr>
+<td align="left">[charlist]</td>
+<td align="left">字符列中的任何单一字符</td>
+</tr>
+<tr>
+<td align="left">[^charlist]或者[!charlist]</td>
+<td align="left">不在字符列中的任何单一字符</td>
+</tr>
+</tbody></table>
+<p>我们希望从上面的 “Persons” 表中选取居住的城市<em>不以</em> “A” 或 “L” 或 “N” 开头的人：</p>
+<p>我们可以使用下面的 SELECT 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Persons</span><br><span class="line"><span class="keyword">WHERE</span> City <span class="keyword">LIKE</span> <span class="string">&#x27;[!ALN]%&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="In"><a href="#In" class="headerlink" title="In"></a>In</h2><p>IN 操作符允许我们在 WHERE 子句中规定多个值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1,value2,...)</span><br></pre></td></tr></table></figure>
+
+<p>现在，我们希望从上表中选取姓氏为 Adams 和 Carter 的人：</p>
+<p>我们可以使用下面的 SELECT 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Persons</span><br><span class="line"><span class="keyword">WHERE</span> LastName <span class="keyword">IN</span> (<span class="string">&#x27;Adams&#x27;</span>,<span class="string">&#x27;Carter&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Between"><a href="#Between" class="headerlink" title="Between"></a>Between</h2><p>操作符 BETWEEN … AND 会选取介于两个值之间的数据范围。这些值可以是数值、文本或者日期。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> column_name</span><br><span class="line">(<span class="keyword">NOT</span>) <span class="keyword">BETWEEN</span> value1 <span class="keyword">AND</span> value2</span><br></pre></td></tr></table></figure>
+
+<p><strong>重要事项：</strong>不同的数据库对 BETWEEN…AND 操作符的处理方式是有差异的。某些数据库会列出介于 “Adams” 和 “Carter” 之间的人，但不包括 “Adams” 和 “Carter” ；某些数据库会列出介于 “Adams” 和 “Carter” 之间并包括 “Adams” 和 “Carter” 的人；而另一些数据库会列出介于 “Adams” 和 “Carter” 之间的人，包括 “Adams” ，但不包括 “Carter” 。</p>
+<p>所以，请检查你的数据库是如何处理 BETWEEN….AND 操作符的！</p>
+<h2 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h2><p>假设我们有两个表分别是：”Persons” 和 “Product_Orders”。我们分别为它们指定别名 “p” 和 “po”。</p>
+<p>现在，我们希望列出 “John Adams” 的所有定单。</p>
+<p>我们可以使用下面的 SELECT 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> po.OrderID, p.LastName, p.FirstName</span><br><span class="line"><span class="keyword">FROM</span> Persons <span class="keyword">AS</span> p, Product_Orders <span class="keyword">AS</span> po</span><br><span class="line"><span class="keyword">WHERE</span> p.LastName=<span class="string">&#x27;Adams&#x27;</span> <span class="keyword">AND</span> p.FirstName=<span class="string">&#x27;John&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Union"><a href="#Union" class="headerlink" title="Union"></a>Union</h2><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</p>
+<p>请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。</p>
+<p>SQL UNION 语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
+
+<p><strong>注释：</strong>默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。</p>
+<p>SQL UNION ALL 语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
+
+<p>另外，UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。</p>
+<h2 id="Select-into"><a href="#Select-into" class="headerlink" title="Select into"></a>Select into</h2><p>SELECT INTO 语句从一个表中选取数据，然后把数据插入另一个表中。</p>
+<p>SELECT INTO 语句常用于创建表的备份复件或者用于对记录进行存档。</p>
+<p>SQL SELECT INTO 语法</p>
+<p>您可以把所有的列插入新表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">INTO</span> new_table_name [<span class="keyword">IN</span> externaldatabase] </span><br><span class="line"><span class="keyword">FROM</span> old_tablename</span><br></pre></td></tr></table></figure>
+
+<p>或者只把希望的列插入新表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">INTO</span> new_table_name [<span class="keyword">IN</span> externaldatabase] </span><br><span class="line"><span class="keyword">FROM</span> old_tablename</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Create-database-and-table"><a href="#Create-database-and-table" class="headerlink" title="Create database and table"></a>Create database and table</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> database_name</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">  (</span><br><span class="line">  Id_P <span class="built_in">int</span>,</span><br><span class="line">  LastName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">  FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">  Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">  City <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h2><h4 id="Not-null"><a href="#Not-null" class="headerlink" title="Not null"></a>Not null</h4><p>NOT NULL 约束强制列不接受 NULL 值。</p>
+<p>NOT NULL 约束强制字段始终包含值。这意味着，如果不向字段添加值，就无法插入新记录或者更新记录。</p>
+<h4 id="Unique"><a href="#Unique" class="headerlink" title="Unique"></a>Unique</h4><p>UNIQUE 约束唯一标识数据库表中的每条记录。</p>
+<p>UNIQUE 和 PRIMARY KEY 约束均为列或列集合提供了唯一性的保证。</p>
+<p>PRIMARY KEY 拥有自动定义的 UNIQUE 约束。</p>
+<h5 id="SQL-UNIQUE-Constraint-on-CREATE-TABLE"><a href="#SQL-UNIQUE-Constraint-on-CREATE-TABLE" class="headerlink" title="SQL UNIQUE Constraint on CREATE TABLE"></a>SQL UNIQUE Constraint on CREATE TABLE</h5><p>MySQL在 “Persons” 表创建时在 “Id_P” 列创建 UNIQUE 约束：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">UNIQUE</span> (Id_P)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束，请使用下面的 SQL 语法：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (Id_P,LastName)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h5 id="SQL-UNIQUE-Constraint-on-ALTER-TABLE"><a href="#SQL-UNIQUE-Constraint-on-ALTER-TABLE" class="headerlink" title="SQL UNIQUE Constraint on ALTER TABLE"></a>SQL UNIQUE Constraint on ALTER TABLE</h5><p>当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> (Id_P)</span><br></pre></td></tr></table></figure>
+
+<p>如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (Id_P,LastName)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Foreign-key"><a href="#Foreign-key" class="headerlink" title="Foreign key"></a>Foreign key</h2><p>“Persons” 表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Id_P</th>
+<th align="left">LastName</th>
+<th align="left">FirstName</th>
+<th align="left">Address</th>
+<th align="left">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Adams</td>
+<td align="left">John</td>
+<td align="left">Oxford Street</td>
+<td align="left">London</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Bush</td>
+<td align="left">George</td>
+<td align="left">Fifth Avenue</td>
+<td align="left">New York</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Carter</td>
+<td align="left">Thomas</td>
+<td align="left">Changan Street</td>
+<td align="left">Beijing</td>
+</tr>
+</tbody></table>
+<p>“Orders” 表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Id_O</th>
+<th align="left">OrderNo</th>
+<th align="left">Id_P</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">77895</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">44678</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">22456</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">24562</td>
+<td align="left">1</td>
+</tr>
+</tbody></table>
+<h5 id="SQL-FOREIGN-KEY-Constraint-on-CREATE-TABLE"><a href="#SQL-FOREIGN-KEY-Constraint-on-CREATE-TABLE" class="headerlink" title="SQL FOREIGN KEY Constraint on CREATE TABLE"></a>SQL FOREIGN KEY Constraint on CREATE TABLE</h5><p>下面的 SQL 在 “Orders” 表创建时为 “Id_P” 列创建 FOREIGN KEY：</p>
+<p>MySQL:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">Id_O <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">OrderNo <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">Id_P <span class="built_in">int</span>,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (Id_O),</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (Id_P) <span class="keyword">REFERENCES</span> Persons(Id_P)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要命名 FOREIGN KEY 约束，以及为多个列定义 FOREIGN KEY 约束，请使用下面的 SQL 语法：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">Id_O <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">OrderNo <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">Id_P <span class="built_in">int</span>,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (Id_O),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> fk_PerOrders <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (Id_P)</span><br><span class="line"><span class="keyword">REFERENCES</span> Persons(Id_P)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h5 id="SQL-FOREIGN-KEY-Constraint-on-ALTER-TABLE"><a href="#SQL-FOREIGN-KEY-Constraint-on-ALTER-TABLE" class="headerlink" title="SQL FOREIGN KEY Constraint on ALTER TABLE"></a>SQL FOREIGN KEY Constraint on ALTER TABLE</h5><p>如果在 “Orders” 表已存在的情况下为 “Id_P” 列创建 FOREIGN KEY 约束，请使用下面的 SQL：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (Id_P)</span><br><span class="line"><span class="keyword">REFERENCES</span> Persons(Id_P)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要命名 FOREIGN KEY 约束，以及为多个列定义 FOREIGN KEY 约束，请使用下面的 SQL 语法：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_PerOrders</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (Id_P)</span><br><span class="line"><span class="keyword">REFERENCES</span> Persons(Id_P)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Check"><a href="#Check" class="headerlink" title="Check"></a>Check</h2><p>如果需要命名 CHECK 约束，以及为多个列定义 CHECK 约束，请使用下面的 SQL 语法：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (Id_P&gt;<span class="number">0</span> <span class="keyword">AND</span> City=<span class="string">&#x27;Sandnes&#x27;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h5 id="SQL-CHECK-Constraint-on-ALTER-TABLE"><a href="#SQL-CHECK-Constraint-on-ALTER-TABLE" class="headerlink" title="SQL CHECK Constraint on ALTER TABLE"></a>SQL CHECK Constraint on ALTER TABLE</h5><p>如果在表已存在的情况下为 “Id_P” 列创建 CHECK 约束，请使用下面的 SQL：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CHECK</span> (Id_P&gt;<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要命名 CHECK 约束，以及为多个列定义 CHECK 约束，请使用下面的 SQL 语法：</p>
+<p>MySQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (Id_P&gt;<span class="number">0</span> <span class="keyword">AND</span> City=<span class="string">&#x27;Sandnes&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h2><h5 id="SQL-DEFAULT-Constraint-on-CREATE-TABLE"><a href="#SQL-DEFAULT-Constraint-on-CREATE-TABLE" class="headerlink" title="SQL DEFAULT Constraint on CREATE TABLE"></a>SQL DEFAULT Constraint on CREATE TABLE</h5><p>下面的 SQL 在 “Persons” 表创建时为 “City” 列创建 DEFAULT 约束：</p>
+<p>My SQL / SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;Sandnes&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>通过使用类似 GETDATE() 这样的函数，DEFAULT 约束也可以用于插入系统值：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">Id_O <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">OrderNo <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">Id_P <span class="built_in">int</span>,</span><br><span class="line">OrderDate <span class="built_in">date</span> <span class="keyword">DEFAULT</span> <span class="keyword">GETDATE</span>()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h5 id="SQL-DEFAULT-Constraint-on-ALTER-TABLE"><a href="#SQL-DEFAULT-Constraint-on-ALTER-TABLE" class="headerlink" title="SQL DEFAULT Constraint on ALTER TABLE"></a>SQL DEFAULT Constraint on ALTER TABLE</h5><p>如果在表已存在的情况下为 “City” 列创建 DEFAULT 约束，请使用下面的 SQL：</p>
+<p>MySQL:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ALTER</span> City <span class="keyword">SET</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;SANDNES&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>SQL Server / Oracle / MS Access:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> City <span class="keyword">SET</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;SANDNES&#x27;</span></span><br></pre></td></tr></table></figure>
+
+</div><div class="tags"><a href="/tags/SQL/"><i class="fa fa-tag"></i>SQL</a></div><div class="post-nav"><a class="pre" href="/2020/11/08/React-Learning-Notes/">React Learning Notes</a><a class="next" href="/2020/10/23/Modern-React-with-Redux-Notes/">Modern React with Redux Notes</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://crispgit.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/React/">React</a></li></ul></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/HTML-CSS/" style="font-size: 15px;">HTML, CSS</a> <a href="/tags/IDE/" style="font-size: 15px;">IDE</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/09/HTML-CSS-Learning-Notes/">HTML/CSS Learning Notes</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/08/JavaScript-Learning-Notes/">JavaScript Learning Notes</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/08/React-Learning-Notes/">React Learning Notes</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/30/SQL-Notes/">SQL Notes</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/23/Modern-React-with-Redux-Notes/">Modern React with Redux Notes</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/23/Prettier-Set-up-in-VSCode-and-WebStorm/">Prettier Set up in VSCode and WebStorm</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/Recording-of-Setting-Up-This-Blog/">Recording of Setting Up This Blog</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">Crisp's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
