@@ -1,4 +1,148 @@
 <!DOCTYPE html><html lang="en"><head><meta name="google-site-verification" content="qQFjU3HEF3ObUKbSF6X9-p4LkrsVB1J_V7BY8PsGUYM"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>Git Learning Notes | Crisp's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Git Learning Notes</h1><a id="logo" href="/.">Crisp's Blog</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Git Learning Notes</h1><div class="post-meta">2021-01-14</div><div class="post-content"><p>[toc]</p>
+<h1 id="Learn-Git-Branching"><a href="#Learn-Git-Branching" class="headerlink" title="Learn Git Branching"></a>Learn Git Branching</h1><p>This is my notes while learning <a target="_blank" rel="noopener" href="https://learngitbranching.js.org/">https://learngitbranching.js.org/</a></p>
+<h4 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h4><p><code>git merge &lt;br&gt;</code> this command merge branch <code>br</code> to current branch</p>
+<p><img src="https://i.imgur.com/aWORC3H.png" alt="Screen Shot 2021-01-14 at 11.24.31"></p>
+<p><img src="https://i.imgur.com/3YriAr8.png" alt="Screen Shot 2021-01-14 at 11.24.41"></p>
+<p><img src="https://i.imgur.com/0eDvgdN.png" alt="Screen Shot 2021-01-14 at 11.24.57"></p>
+<p>We can still merge <code>main</code> into <code>bugFix</code> to ensure each branch contains all the work in the repo</p>
+<p><img src="https://i.imgur.com/HrynVwz.png" alt="Screen Shot 2021-01-14 at 11.33.42"></p>
+<h4 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h4><p><em>(I haven’t found where it is useful)</em></p>
+<p>Rebasing essentially takes a set of commits, “copies” them, and plops them down somewhere else.</p>
+<p>While this sounds confusing, the advantage of rebasing is that it can be used to make a nice linear sequence of commits. The commit log / history of the repository will be a lot cleaner if only rebasing is allowed.</p>
+<p><img src="https://i.imgur.com/pJR2e89.png" alt="Screen Shot 2021-01-14 at 11.45.31"></p>
+<p>We would like to move our work from bugFix directly onto the work from main. That way it would look like these two features were developed sequentially, when in reality they were developed in parallel.</p>
+<p><code>git rebase main</code></p>
+<p><img src="https://i.imgur.com/CbnZPEx.png" alt="Screen Shot 2021-01-15 at 17.36.56"></p>
+<p>We can continue to move <code>main</code> to <code>bugFix</code> with <code>git rebase bugFix</code> from <code>main</code> </p>
+<p><img src="https://i.imgur.com/eJLWg2q.png"></p>
+<h4 id="relative-refs"><a href="#relative-refs" class="headerlink" title="relative refs"></a>relative refs</h4><p>With relative refs, you can start somewhere memorable (like the branch <code>bugFix</code> or <code>HEAD</code>) and work from there.</p>
+<p>Relative commits are powerful, but we will introduce two simple ones here:</p>
+<ul>
+<li>Moving upwards one commit at a time with <code>^</code></li>
+<li>Moving upwards a number of times with <code>~&lt;num&gt;</code></li>
+</ul>
+<p><img src="https://i.imgur.com/C2isd5R.png" alt="Screen Shot 2021-01-14 at 12.14.06"></p>
+<p><code>git checkout main^</code></p>
+<p><img src="https://i.imgur.com/J3RzWSI.png" alt="Screen Shot 2021-01-14 at 12.14.33"></p>
+<p><code>git checkout bugFix~1</code> is the same as <code>git checkout bugFix^</code></p>
+<p>One of the most common ways I use relative refs is to move branches around. You can directly reassign a branch to a commit with the <code>-f</code> option. So something like:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -f main HEAD~<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>moves (by force) the main branch to three parents behind HEAD.</p>
+<p><img src="https://i.imgur.com/7Qi6axZ.png" alt="Screen Shot 2021-01-14 at 12.25.29"></p>
+<p>Relative refs gave us a concise way to refer to <code>C1</code>and branch forcing (<code>-f</code>) gave us a way to quickly move a branch to that location.</p>
+<p><img src="https://i.imgur.com/JIscfDZ.png" alt="Screen Shot 2021-01-14 at 12.25.52"></p>
+<h4 id="reverse-changes"><a href="#reverse-changes" class="headerlink" title="reverse changes"></a>reverse changes</h4><blockquote>
+<p>Ref:  <a target="_blank" rel="noopener" href="https://blog.csdn.net/yxlshk/article/details/79944535">https://blog.csdn.net/yxlshk/article/details/79944535</a></p>
+</blockquote>
+<h5 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h5><p><img src="https://i.imgur.com/mBIqJqh.png" alt="img"></p>
+<p>If we want to reset to some previous commit and ignore the commits after it, we can use <code>git reset</code></p>
+<p><code>git reset --hard &lt;target commit id&gt;</code></p>
+<p>if we <code>git push</code> here, it will be an error because local HEAD is behind remote counterpart. So we can use <code>git push -f</code> to push</p>
+<h5 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h5><p><img src="https://i.imgur.com/OEBfoRb.png" alt="这里写图片描述"></p>
+<p>If we want to cancel the modification of some commit while saving the modification of the commits after it, we can use <code>git revert</code></p>
+<p><code>git revert -n &lt;commit id&gt;</code> if we want to can cel <code>commit id</code></p>
+<p>Then we can have a new commit <code>git commit -m &quot;revert xx&quot; </code></p>
+<h4 id="git-cherry-pick"><a href="#git-cherry-pick" class="headerlink" title="git cherry-pick"></a>git cherry-pick</h4><blockquote>
+<p> ref: <a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html">https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html</a></p>
+</blockquote>
+<p>If we want to merge some commits of another branch to current branch, we can use cherry pick.</p>
+<p>举例来说，代码仓库有<code>master</code>和<code>feature</code>两个分支。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a - b - c - d   Master</span><br><span class="line">     \</span><br><span class="line">       e - f - g Feature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>现在将提交<code>f</code>应用到<code>master</code>分支。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 master 分支</span></span><br><span class="line">$ git checkout master</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cherry pick 操作</span></span><br><span class="line">$ git cherry-pick f</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的操作完成以后，代码库就变成了下面的样子。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a - b - c - d - f   Master</span><br><span class="line">     \</span><br><span class="line">       e - f - g Feature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>从上面可以看到，<code>master</code>分支的末尾增加了一个提交<code>f</code>。</p>
+<h4 id="interactive-rebase"><a href="#interactive-rebase" class="headerlink" title="interactive rebase"></a>interactive rebase</h4><p>When the interactive rebase dialog opens, you have the ability to do two things in our educational application:</p>
+<ul>
+<li><p>You can reorder commits simply by changing their order in the UI (via dragging and dropping with the mouse).</p>
+</li>
+<li><p>You can choose to keep all commits or drop specific ones. When the dialog opens, each commit is set to be included by the <code>pick</code>button next to it being active. To drop a commit, toggle off its <code>pick</code> button.</p>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/FI3X5bS.png" alt="Screen Shot 2021-01-15 at 17.19.09"></p>
+<p><code>git rebase -i HEAD~4</code> and we can reorganize the commits from C2 to C5</p>
+<p><img src="https://i.imgur.com/V8Vn6LZ.png" alt="Screen Shot 2021-01-15 at 17.20.13"></p>
+<p><img src="https://i.imgur.com/ZabXDVg.png" alt="Screen Shot 2021-01-15 at 17.20.54"></p>
+<h4 id="a-case-for-cherry-pick-and-interactive-rebase"><a href="#a-case-for-cherry-pick-and-interactive-rebase" class="headerlink" title="a case for cherry pick and interactive rebase"></a>a case for cherry pick and interactive rebase</h4><p><strong>Locally stacked commits</strong></p>
+<p>Here’s a development situation that often happens: I’m trying to track down a bug but it is quite elusive. In order to aid in my detective work, I put in a few debug commands and a few print statements.</p>
+<p>All of these debugging / print statements are in their own commits. Finally I track down the bug, fix it, and rejoice!</p>
+<p>Only problem is that I now need to get my <code>bugFix</code> back into the <code>main</code> branch. If I simply fast-forwarded <code>main</code>, then <code>main</code> would get all my debug statements which is undesirable. There has to be another way…</p>
+<p>We need to tell git to copy only one of the commits over. This is just like the levels earlier on moving work around – we can use the same commands:</p>
+<ul>
+<li><code>git rebase -i</code></li>
+<li><code>git cherry-pick</code></li>
+</ul>
+<p><img src="https://i.imgur.com/QW0DAnj.png" alt="Screen Shot 2021-01-15 at 17.31.01"></p>
+<p>Solution:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">1: cherry pick</span></span><br><span class="line"></span><br><span class="line">gti checkout C1</span><br><span class="line">git cherry-pick C4 </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">2: interactive rebase</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">only leave C3</span></span><br><span class="line">git rebase -i HEAD~3</span><br><span class="line"></span><br><span class="line">git checkout main</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">move main to bugFix</span></span><br><span class="line">git rebase bugFix</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/jTASZOS.png" alt="Screen Shot 2021-01-15 at 17.28.55"> </p>
+<h4 id="make-modification-to-previous-commit"><a href="#make-modification-to-previous-commit" class="headerlink" title="make modification to previous commit"></a>make modification to previous commit</h4><p>Here’s another situation that happens quite commonly. You have some changes (<code>newImage</code>) and another set of changes (<code>caption</code>) that are related, so they are stacked on top of each other in your repository (aka one after another).</p>
+<p>The tricky thing is that sometimes you need to make a small modification to an earlier commit. In this case, design wants us to change the dimensions of <code>newImage</code> slightly, even though that commit is way back in our history!!</p>
+<p>We will overcome this difficulty by doing the following:</p>
+<ul>
+<li><p>We will re-order the commits so the one we want to change is on top with <code>git rebase -i</code></p>
+</li>
+<li><p>We will <code>git commit --amend</code> to make the slight modification</p>
+</li>
+<li><p>Then we will re-order the commits back to how they were previously with <code>git rebase -i</code></p>
+</li>
+<li><p>Finally, we will move main to this updated part of the tree to finish the level (via the method of your choosing)</p>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/LZtgGwS.png" alt="Screen Shot 2021-01-15 at 17.55.33"></p>
+<p>Solution: use <code>git rebase -i</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> revert C3 and C2</span></span><br><span class="line">git rebase -i</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> make modification</span></span><br><span class="line">git commit --amend</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> revert C3 and C2 again</span></span><br><span class="line">git rebase -i</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> rebase to caption from main</span></span><br><span class="line">git rebase caption mian</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/8P21dBy.png" alt="Screen Shot 2021-01-15 at 18.18.15"></p>
+<p>Solution: use <code>git cherry-pick</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git chekout main</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> get C2 <span class="keyword">in</span> another branch to modify</span></span><br><span class="line">git cherry-pick C2</span><br><span class="line"></span><br><span class="line">git commit --amend</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> attach C3 to new C2</span></span><br><span class="line">git cherry-pick C3</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/Iro3ceb.png" alt="Screen Shot 2021-01-15 at 18.16.41"></p>
+<h4 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h4><p><code>git tag v1 C1</code></p>
+<p><img src="https://i.imgur.com/nkvcPey.png" alt="Screen Shot 2021-01-15 at 18.26.00"></p>
+<h4 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h4><p><img src="https://i.imgur.com/cC5bZ3H.png" alt="Screen Shot 2021-01-15 at 20.21.33"></p>
+<p><code>git fetch</code></p>
+<p><img src="https://i.imgur.com/okhjWgY.png" alt="Screen Shot 2021-01-15 at 20.21.45"></p>
+<p><code>git fetch</code> performs two main steps, and two main steps only. It:</p>
+<ul>
+<li>downloads the commits that the remote has but are missing from our local repository, and…</li>
+<li>updates where our remote branches point (for instance, <code>o/main</code>)</li>
+</ul>
+<p><code>git fetch</code> essentially brings our <em>local</em> representation of the remote repository into synchronization with what the <em>actual</em> remote repository looks like (right now).</p>
+<p>If you remember from the previous lesson, we said that remote branches reflect the state of the remote repositories <em>since</em> you last talked to those remotes. <code>git fetch</code> is the way you talk to these remotes! Hopefully the connection between remote branches and <code>git fetch</code> is apparent now.</p>
+<p><strong><code>git fetch</code> doesn’t change local state</strong></p>
+<p><code>git fetch</code>, however, does not change anything about <em>your</em> local state. It will not update your <code>main</code> branch or change anything about how your file system looks right now.</p>
+<p>This is important to understand because a lot of developers think that running <code>git fetch</code> will make their local work reflect the state of the remote. It may download all the necessary data to do that, but it does <em>not</em> actually change any of your local files.</p>
+<h4 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h4><p>Now that we’ve seen how to fetch data from a remote repository with <code>git fetch</code>, let’s update our work to reflect those changes!</p>
+<p>There are actually many ways to do this – once you have new commits available locally, you can incorporate them as if they were just normal commits on other branches. This means you could execute commands like:</p>
+<ul>
+<li><code>git cherry-pick o/main</code></li>
+<li><code>git rebase o/main</code></li>
+<li><code>git merge o/main</code></li>
+<li>etc., etc.</li>
+</ul>
+<p>In fact, the workflow of <em>fetching</em> remote changes and then <em>merging</em>them is so common that git actually provides a command that does both at once! That command is <code>git pull</code>.</p>
+<p><img src="https://i.imgur.com/7VvCUIL.png" alt="Screen Shot 2021-01-15 at 20.37.13"></p>
+<p><code>git pull</code></p>
+<p><img src="https://i.imgur.com/cGH5jym.png" alt="Screen Shot 2021-01-15 at 20.36.40"></p>
+<h4 id="conflict-of-remote-and-local-branch"><a href="#conflict-of-remote-and-local-branch" class="headerlink" title="conflict of remote and local branch"></a>conflict of remote and local branch</h4><p><img src="https://i.imgur.com/CQ5fywa.png" alt="Screen Shot 2021-01-15 at 21.06.45"></p>
+<p>Solution: rebase</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pull remote main and rebase <span class="built_in">local</span> main with o/main</span></span><br><span class="line">git pull --rebase</span><br><span class="line"></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/12VOHuX.png" alt="Screen Shot 2021-01-15 at 21.09.33"></p>
+<p>Solution: merge</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/1kBAYUX.png" alt="Screen Shot 2021-01-15 at 21.13.05"></p>
 <h1 id="Some-tips-in-Git"><a href="#Some-tips-in-Git" class="headerlink" title="Some tips in Git"></a>Some tips in Git</h1><p>This is my notes when learning git mainly from this resource:</p>
 <p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">https://www.liaoxuefeng.com/wiki/896043488029600</a></p>
 <h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/897013573512192">版本回退</a></h4><h5 id="git-reflog-记录每一条命令"><a href="#git-reflog-记录每一条命令" class="headerlink" title="git reflog 记录每一条命令"></a><code>git reflog</code> 记录每一条命令</h5><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">ref</span>log</span><br><span class="line">e475afc <span class="symbol">HEAD@</span>&#123;<span class="number">1</span>&#125;: reset: moving to HEAD^</span><br><span class="line"><span class="number">1094</span>adb (HEAD -&gt; master) <span class="symbol">HEAD@</span>&#123;<span class="number">2</span>&#125;: commit: append GPL</span><br><span class="line">e475afc <span class="symbol">HEAD@</span>&#123;<span class="number">3</span>&#125;: commit: add distributed</span><br><span class="line">eaadf4e <span class="symbol">HEAD@</span>&#123;<span class="number">4</span>&#125;: commit (initial): wrote a readme file</span><br></pre></td></tr></table></figure>
@@ -98,51 +242,7 @@
 <li>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code>；</li>
 <li>从远程抓取分支，使用<code>git pull</code>，如果有冲突，要先处理冲突。</li>
 </ul>
-<h4 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/902335212905824">标签管理</a></h4><h5 id="git-tag-lt-tag-name-gt-lt-commit-id-gt-用于新建一个标签，默认为HEAD，也可以指定一个commit-id；"><a href="#git-tag-lt-tag-name-gt-lt-commit-id-gt-用于新建一个标签，默认为HEAD，也可以指定一个commit-id；" class="headerlink" title="git tag &lt;tag name&gt; &lt;commit id&gt;用于新建一个标签，默认为HEAD，也可以指定一个commit id；"></a><code>git tag &lt;tag name&gt; &lt;commit id&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</h5><h5 id="git-tag-a-m-quot-blablabla-quot-可以指定标签信息；"><a href="#git-tag-a-m-quot-blablabla-quot-可以指定标签信息；" class="headerlink" title="git tag -a  -m &quot;blablabla...&quot;可以指定标签信息；"></a><code>git tag -a  -m &quot;blablabla...&quot;</code>可以指定标签信息；</h5><h5 id="git-tag可以查看所有标签。"><a href="#git-tag可以查看所有标签。" class="headerlink" title="git tag可以查看所有标签。"></a><code>git tag</code>可以查看所有标签。</h5><h5 id="git-push-origin-git-push-origin-tags-推送本地标签；"><a href="#git-push-origin-git-push-origin-tags-推送本地标签；" class="headerlink" title="git push origin /git push origin --tags 推送本地标签；"></a><code>git push origin </code>/<code>git push origin --tags</code> 推送本地标签；</h5><h5 id="git-tag-d-lt-tag-name-gt-git-push-origin-refs-tags-删除本地或远程标签"><a href="#git-tag-d-lt-tag-name-gt-git-push-origin-refs-tags-删除本地或远程标签" class="headerlink" title="git tag -d &lt;tag name&gt; / git push origin :refs/tags/删除本地或远程标签"></a><code>git tag -d &lt;tag name&gt; </code>/ <code>git push origin :refs/tags/</code>删除本地或远程标签</h5><h1 id="Learn-Git-Branching"><a href="#Learn-Git-Branching" class="headerlink" title="Learn Git Branching"></a>Learn Git Branching</h1><p>This is my notes while learning <a target="_blank" rel="noopener" href="https://learngitbranching.js.org/">https://learngitbranching.js.org/</a></p>
-<h4 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h4><p><code>git merge &lt;br&gt;</code> this command merge branch <code>br</code> to current branch</p>
-<p><img src="https://i.imgur.com/aWORC3H.png" alt="Screen Shot 2021-01-14 at 11.24.31"></p>
-<p><img src="https://i.imgur.com/3YriAr8.png" alt="Screen Shot 2021-01-14 at 11.24.41"></p>
-<p><img src="https://i.imgur.com/0eDvgdN.png" alt="Screen Shot 2021-01-14 at 11.24.57"></p>
-<p>We can still merge <code>main</code> into <code>bugFix</code> to ensure each branch contains all the work in the repo</p>
-<p><img src="https://i.imgur.com/HrynVwz.png" alt="Screen Shot 2021-01-14 at 11.33.42"></p>
-<h4 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h4><p><em>(I haven’t found where it is useful)</em></p>
-<p>Rebasing essentially takes a set of commits, “copies” them, and plops them down somewhere else.</p>
-<p>While this sounds confusing, the advantage of rebasing is that it can be used to make a nice linear sequence of commits. The commit log / history of the repository will be a lot cleaner if only rebasing is allowed.</p>
-<p><img src="https://i.imgur.com/pJR2e89.png" alt="Screen Shot 2021-01-14 at 11.45.31"></p>
-<p>We would like to move our work from bugFix directly onto the work from main. That way it would look like these two features were developed sequentially, when in reality they were developed in parallel.</p>
-<p><code>git rebase main</code></p>
-<p><img src="https://i.imgur.com/tUWmpzB.png" alt="Screen Shot 2021-01-14 at 11.46.27"></p>
-<p>We can continue to move <code>main</code> to <code>bugFix</code> with <code>git rebase bugFix</code> from <code>main</code></p>
-<p><img src="https://i.imgur.com/wS52tAM.png"></p>
-<h4 id="Relative-refs"><a href="#Relative-refs" class="headerlink" title="Relative refs"></a>Relative refs</h4><p>With relative refs, you can start somewhere memorable (like the branch <code>bugFix</code> or <code>HEAD</code>) and work from there.</p>
-<p>Relative commits are powerful, but we will introduce two simple ones here:</p>
-<ul>
-<li>Moving upwards one commit at a time with <code>^</code></li>
-<li>Moving upwards a number of times with <code>~&lt;num&gt;</code></li>
-</ul>
-<p><img src="https://i.imgur.com/C2isd5R.png" alt="Screen Shot 2021-01-14 at 12.14.06"></p>
-<p><code>git checkout main^</code></p>
-<p><img src="https://i.imgur.com/J3RzWSI.png" alt="Screen Shot 2021-01-14 at 12.14.33"></p>
-<p><code>git checkout bugFix~1</code> is the same as <code>git checkout bugFix^</code></p>
-<p>One of the most common ways I use relative refs is to move branches around. You can directly reassign a branch to a commit with the <code>-f</code> option. So something like:</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -f main HEAD~<span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>moves (by force) the main branch to three parents behind HEAD.</p>
-<p><img src="https://i.imgur.com/7Qi6axZ.png" alt="Screen Shot 2021-01-14 at 12.25.29"></p>
-<p>Relative refs gave us a concise way to refer to <code>C1</code>and branch forcing (<code>-f</code>) gave us a way to quickly move a branch to that location.</p>
-<p><img src="https://i.imgur.com/JIscfDZ.png" alt="Screen Shot 2021-01-14 at 12.25.52"></p>
-<h4 id="reverse-changes"><a href="#reverse-changes" class="headerlink" title="reverse changes"></a>reverse changes</h4><blockquote>
-<p>Ref:  <a target="_blank" rel="noopener" href="https://blog.csdn.net/yxlshk/article/details/79944535">https://blog.csdn.net/yxlshk/article/details/79944535</a></p>
-</blockquote>
-<h5 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h5><p><img src="https://i.imgur.com/mBIqJqh.png" alt="img"></p>
-<p>If we want to reset to some previous commit and ignore the commits after it, we can use <code>git reset</code></p>
-<p><code>git reset --hard &lt;target commit id&gt;</code></p>
-<p>if we <code>git push</code> here, it will be an error because local HEAD is behind remote counterpart. So we can use <code>git push -f</code> to push</p>
-<h5 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h5><p><img src="https://i.imgur.com/OEBfoRb.png" alt="这里写图片描述"></p>
-<p>If we want to cancel the modification of some commit while saving the modification of the commits after it, we can use <code>git revert</code></p>
-<p><code>git revert -n &lt;commit id&gt;</code> if we want to can cel <code>commit id</code></p>
-<p>Then we can have a new commit <code>git commit -m &quot;revert xx&quot; </code></p>
-<h1 id="Other-Problems-Encountered"><a href="#Other-Problems-Encountered" class="headerlink" title="Other Problems Encountered"></a>Other Problems Encountered</h1><h4 id="Git-push-without-password"><a href="#Git-push-without-password" class="headerlink" title="Git push without password"></a><a target="_blank" rel="noopener" href="https://todebug.com/Tips/">Git push without password</a></h4><p>1.使用文件创建用户名和密码</p>
+<h4 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/902335212905824">标签管理</a></h4><h5 id="git-tag-lt-tag-name-gt-lt-commit-id-gt-用于新建一个标签，默认为HEAD，也可以指定一个commit-id；"><a href="#git-tag-lt-tag-name-gt-lt-commit-id-gt-用于新建一个标签，默认为HEAD，也可以指定一个commit-id；" class="headerlink" title="git tag &lt;tag name&gt; &lt;commit id&gt;用于新建一个标签，默认为HEAD，也可以指定一个commit id；"></a><code>git tag &lt;tag name&gt; &lt;commit id&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</h5><h5 id="git-tag-a-m-quot-blablabla-quot-可以指定标签信息；"><a href="#git-tag-a-m-quot-blablabla-quot-可以指定标签信息；" class="headerlink" title="git tag -a  -m &quot;blablabla...&quot;可以指定标签信息；"></a><code>git tag -a  -m &quot;blablabla...&quot;</code>可以指定标签信息；</h5><h5 id="git-tag可以查看所有标签。"><a href="#git-tag可以查看所有标签。" class="headerlink" title="git tag可以查看所有标签。"></a><code>git tag</code>可以查看所有标签。</h5><h5 id="git-push-origin-git-push-origin-tags-推送本地标签；"><a href="#git-push-origin-git-push-origin-tags-推送本地标签；" class="headerlink" title="git push origin /git push origin --tags 推送本地标签；"></a><code>git push origin </code>/<code>git push origin --tags</code> 推送本地标签；</h5><h5 id="git-tag-d-lt-tag-name-gt-git-push-origin-refs-tags-删除本地或远程标签"><a href="#git-tag-d-lt-tag-name-gt-git-push-origin-refs-tags-删除本地或远程标签" class="headerlink" title="git tag -d &lt;tag name&gt; / git push origin :refs/tags/删除本地或远程标签"></a><code>git tag -d &lt;tag name&gt; </code>/ <code>git push origin :refs/tags/</code>删除本地或远程标签</h5><h1 id="Other-Problems-Encountered"><a href="#Other-Problems-Encountered" class="headerlink" title="Other Problems Encountered"></a>Other Problems Encountered</h1><h4 id="Git-push-without-password"><a href="#Git-push-without-password" class="headerlink" title="Git push without password"></a><a target="_blank" rel="noopener" href="https://todebug.com/Tips/">Git push without password</a></h4><p>1.使用文件创建用户名和密码</p>
 <p>文件创建在用户主目录下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch .git-credentials</span><br><span class="line">vim .git-credentials</span><br><span class="line">https://&#123;username&#125;:&#123;password&#125;@github.com</span><br></pre></td></tr></table></figure>
 
