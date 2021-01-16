@@ -131,7 +131,18 @@
 <p><img src="https://i.imgur.com/7Qi6axZ.png" alt="Screen Shot 2021-01-14 at 12.25.29"></p>
 <p>Relative refs gave us a concise way to refer to <code>C1</code>and branch forcing (<code>-f</code>) gave us a way to quickly move a branch to that location.</p>
 <p><img src="https://i.imgur.com/JIscfDZ.png" alt="Screen Shot 2021-01-14 at 12.25.52"></p>
-<h4 id="reverse-changes"><a href="#reverse-changes" class="headerlink" title="reverse changes"></a>reverse changes</h4><h1 id="Other-Problems-Encountered"><a href="#Other-Problems-Encountered" class="headerlink" title="Other Problems Encountered"></a>Other Problems Encountered</h1><h4 id="Git-push-without-password"><a href="#Git-push-without-password" class="headerlink" title="Git push without password"></a><a target="_blank" rel="noopener" href="https://todebug.com/Tips/">Git push without password</a></h4><p>1.使用文件创建用户名和密码</p>
+<h4 id="reverse-changes"><a href="#reverse-changes" class="headerlink" title="reverse changes"></a>reverse changes</h4><blockquote>
+<p>Ref:  <a target="_blank" rel="noopener" href="https://blog.csdn.net/yxlshk/article/details/79944535">https://blog.csdn.net/yxlshk/article/details/79944535</a></p>
+</blockquote>
+<h5 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h5><p><img src="https://i.imgur.com/mBIqJqh.png" alt="img"></p>
+<p>If we want to reset to some previous commit and ignore the commits after it, we can use <code>git reset</code></p>
+<p><code>git reset --hard &lt;target commit id&gt;</code></p>
+<p>if we <code>git push</code> here, it will be an error because local HEAD is behind remote counterpart. So we can use <code>git push -f</code> to push</p>
+<h5 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h5><p><img src="https://i.imgur.com/OEBfoRb.png" alt="这里写图片描述"></p>
+<p>If we want to cancel the modification of some commit while saving the modification of the commits after it, we can use <code>git revert</code></p>
+<p><code>git revert -n &lt;commit id&gt;</code> if we want to can cel <code>commit id</code></p>
+<p>Then we can have a new commit <code>git commit -m &quot;revert xx&quot; </code></p>
+<h1 id="Other-Problems-Encountered"><a href="#Other-Problems-Encountered" class="headerlink" title="Other Problems Encountered"></a>Other Problems Encountered</h1><h4 id="Git-push-without-password"><a href="#Git-push-without-password" class="headerlink" title="Git push without password"></a><a target="_blank" rel="noopener" href="https://todebug.com/Tips/">Git push without password</a></h4><p>1.使用文件创建用户名和密码</p>
 <p>文件创建在用户主目录下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch .git-credentials</span><br><span class="line">vim .git-credentials</span><br><span class="line">https://&#123;username&#125;:&#123;password&#125;@github.com</span><br></pre></td></tr></table></figure>
 
