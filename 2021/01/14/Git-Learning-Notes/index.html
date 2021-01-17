@@ -143,7 +143,32 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/1kBAYUX.png" alt="Screen Shot 2021-01-15 at 21.13.05"></p>
-<h4 id="merge-features"><a href="#merge-features" class="headerlink" title="merge features"></a>merge features</h4><p><img src="https://i.imgur.com/S1U8Ts0.png" alt="Screen Shot 2021-01-16 at 12.03.34"></p>
+<h4 id="merge-features"><a href="#merge-features" class="headerlink" title="merge features"></a>merge features</h4><p>It’s common for developers on big projects to do all their work on feature branches (off of <code>main</code>) and then integrate that work only once it’s ready. This is similar to the previous lesson (where side branches get pushed to the remote), but here we introduce one more step.</p>
+<p>Some developers only push and pull when on the <code>main</code> branch – that way <code>main</code> always stays updated to what is on the remote (<code>o/main</code>).</p>
+<p>So for this workflow we combine two things:</p>
+<ul>
+<li>integrating feature branch work onto <code>main</code>, and</li>
+<li>pushing and pulling from the remote</li>
+</ul>
+<p><img src="https://i.imgur.com/Cs8GykO.png" alt="Screen Shot 2021-01-16 at 20.07.43"></p>
+<p>This level is pretty hefty – here is the general outline to solve:</p>
+<ul>
+<li>There are three feature branches – <code>side1</code> <code>side2</code> and <code>side3</code></li>
+<li>We want to push each one of these features, in order, to the remote</li>
+<li>The remote has since been updated, so we will need to incorporate that work as well</li>
+</ul>
+<p><img src="https://i.imgur.com/S1U8Ts0.png" alt="Screen Shot 2021-01-16 at 12.03.34"></p>
+<p>Solution: rebase</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pull C8 from remote repo</span></span><br><span class="line">git checkout main</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> merge feature branch to main</span></span><br><span class="line">git rebase main side1</span><br><span class="line">git rebase side1 side2</span><br><span class="line">git rebase side2 side3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> move main to side3 and push</span></span><br><span class="line">git rebase side3 main</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Solution: merge</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pull C8 from remote repo</span></span><br><span class="line">git checkout main</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> merge feature branch to main</span></span><br><span class="line">git merge side1</span><br><span class="line">git merge side2</span><br><span class="line">git merge side3</span><br><span class="line"></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.imgur.com/MBQZ6gL.png" alt="Screen Shot 2021-01-16 at 20.58.53"></p>
 <h1 id="Some-tips-in-Git"><a href="#Some-tips-in-Git" class="headerlink" title="Some tips in Git"></a>Some tips in Git</h1><p>This is my notes when learning git mainly from this resource:</p>
 <p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">https://www.liaoxuefeng.com/wiki/896043488029600</a></p>
 <h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/897013573512192">版本回退</a></h4><h5 id="git-reflog-记录每一条命令"><a href="#git-reflog-记录每一条命令" class="headerlink" title="git reflog 记录每一条命令"></a><code>git reflog</code> 记录每一条命令</h5><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">ref</span>log</span><br><span class="line">e475afc <span class="symbol">HEAD@</span>&#123;<span class="number">1</span>&#125;: reset: moving to HEAD^</span><br><span class="line"><span class="number">1094</span>adb (HEAD -&gt; master) <span class="symbol">HEAD@</span>&#123;<span class="number">2</span>&#125;: commit: append GPL</span><br><span class="line">e475afc <span class="symbol">HEAD@</span>&#123;<span class="number">3</span>&#125;: commit: add distributed</span><br><span class="line">eaadf4e <span class="symbol">HEAD@</span>&#123;<span class="number">4</span>&#125;: commit (initial): wrote a readme file</span><br></pre></td></tr></table></figure>
