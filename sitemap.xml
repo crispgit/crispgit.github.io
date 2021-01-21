@@ -109,21 +109,7 @@
 
   
   <url>
-    <loc>http://crispgit.github.io/tags/Database/</loc>
-    <lastmod>2021-01-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://crispgit.github.io/tags/HTML-CSS/</loc>
-    <lastmod>2021-01-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://crispgit.github.io/tags/IDE/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -137,6 +123,13 @@
   </url>
   
   <url>
+    <loc>http://crispgit.github.io/tags/Web/</loc>
+    <lastmod>2021-01-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://crispgit.github.io/tags/hexo/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
@@ -144,7 +137,14 @@
   </url>
   
   <url>
-    <loc>http://crispgit.github.io/tags/Web/</loc>
+    <loc>http://crispgit.github.io/tags/IDE/</loc>
+    <lastmod>2021-01-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://crispgit.github.io/tags/Database/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
